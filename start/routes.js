@@ -8,6 +8,7 @@ Route.group(() => {
   Route.resource('/class', "ClassController");
   Route.resource('/class.student', "StudentController");
   Route.resource('/message', "MessageController");
+  Route.resource('/message.student', "SendMessageController");
 }).middleware("auth");
 
 Route.post("/session", "SessionController.store");

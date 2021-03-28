@@ -5,6 +5,7 @@ class StudentController {
   async index ({ request, response, view, params }) {
     const students = await Student.query()
       .where('class_id', params.class_id)
+      .with("messages")
       .fetch();
     return students;
 
@@ -17,6 +18,8 @@ class StudentController {
   async show ({ params, request, response, view }) {
     try {
       const student = await Student.findByOrFail('id', params.id);
+      const messages = await student.messages().fetch();
+      return Object.assign(student, messages);
       return student;
     } catch (error) {
       return response.status(error.status).json({error: "Estudante não encontrado"});
