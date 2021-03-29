@@ -17,10 +17,11 @@ class StudentController {
   }
   async show ({ params, request, response, view }) {
     try {
-      const student = await Student.findByOrFail('id', params.id);
-      const messages = await student.messages().fetch();
-      return Object.assign(student, messages);
-      return student;
+      const students = await Student.query()
+      .where('registration', params.id)
+      .with("messages")
+      .fetch();
+      return students;
     } catch (error) {
       return response.status(error.status).json({error: "Estudante não encontrado"});
     }
