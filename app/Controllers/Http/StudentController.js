@@ -20,7 +20,7 @@ class StudentController {
       const students = await Student.query()
       .where('registration', params.id)
       .with("messages")
-      .fetch();
+      .first();
       return students;
     } catch (error) {
       return response.status(error.status).json({error: "Estudante não encontrado"});

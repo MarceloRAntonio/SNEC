@@ -2,7 +2,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-
+Route.get('/class/:class_id/student/:id', "StudentController.show");
 Route.group(() => {
   Route.resource("/user", "UserController");
   Route.resource('/class', "ClassController");
